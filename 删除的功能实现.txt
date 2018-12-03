@@ -15,32 +15,3 @@
                中的id  转换为int型  Integer.parseInt(id)。
              }   
 
-
-  dao层  
-    
-     dao 接口中的定义删除的抽象方法传递id值, 在去实现抽象方法。
-        
-      实现类中实现方法.
-      01.编写sql语句
- 
-      02.调用 Druid连接池。
-     String sql = "delete from user where id=?";
-               template.update(sql,id); 
-
-
-  补充:当用户去点击删除时，来个友好提示。增加一个体验感
-      
-  
-   <script>
-        function deleteUser(id) {
-
-            if (confirm("您确定要删除吗?")){
-                
-                
-              location.href="${pageContext.request.contextPath}/deleteUserServlet?id="+id;
-
-            }
-
-        }
-        
-    </script>

@@ -1,0 +1,46 @@
+ 点击删除功能的按钮删除当前数据  主要给后台传递的数 唯一标识(id)
+
+
+ web 层
+   
+   1.获取数据id (int型不用设置编码)
+   2.UserService中的方法中方法去删除
+   3.删除后跳转(响应)到查询所有数据的类中再去显示剩下的数据
+    
+  
+ 逻辑层
+    
+   sevlce 接口中定义抽象方法传递id的值,再去实现抽象方法,调用dao中的方法
+                public void deleteuUuser(String id){
+               中的id  转换为int型  Integer.parseInt(id)。
+             }   
+
+
+  dao层  
+    
+     dao 接口中的定义删除的抽象方法传递id值, 在去实现抽象方法。
+        
+      实现类中实现方法.
+      01.编写sql语句
+ 
+      02.调用 Druid连接池。
+     String sql = "delete from user where id=?";
+               template.update(sql,id); 
+
+
+  补充:当用户去点击删除时，来个友好提示。增加一个体验感
+      
+  
+   <script>
+        function deleteUser(id) {
+
+            if (confirm("您确定要删除吗?")){
+                
+                
+              location.href="${pageContext.request.contextPath}/deleteUserServlet?id="+id;
+
+            }
+
+        }
+        
+    </script>
